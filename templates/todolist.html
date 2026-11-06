@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Todolist{% endblock title %}
+    
+
+{% block body %}
+
+<div class="md:d-flex md:justify-content-end">
+    <a href="create/" class="btn-solid theme-success">+ Add Task</a>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S.N.</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <th scope="row">{{task.id}}</th>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>
+        {% if task.is_completed %}
+        <span class="btn-text theme-success">
+          Completed
+        </span>
+        {% else %}
+        <span class="btn-text theme-danger">
+          Pending
+        </span>
+        {% endif %}
+      </td>
+      <td>
+        <a href="{{task.id}}/mark/" class="btn-solid theme-success">Mark</a>
+        <a href="{{task.id}}/" class="btn-solid theme-warning">Edit</a>
+        <a href="{{task.id}}/delete/" class="btn-solid theme-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3>Total completed tasks: {{completed}}</h3>
+<h3>Total incomplete tasks: {{incomplete}}</h3>
+{% endblock body %}
